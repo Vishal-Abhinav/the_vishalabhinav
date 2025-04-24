@@ -2,17 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vishal Abhinav - DevOps Engineer Portfolio</title>
-  
-  <!-- AOS Animate On Scroll -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-  
-  <!-- Animate.css -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vishal Abhinav - DevOps Portfolio</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+  <!-- AOS (Animate on Scroll) -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+  
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"/>
 
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -21,102 +18,165 @@
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
   <style>
+    :root {
+      --bg: #0f172a;
+      --text: #e2e8f0;
+      --accent: #38bdf8;
+      --section-title: #22d3ee;
+      --light-bg: #f1f5f9;
+      --light-text: #1e293b;
+    }
+
     body {
       font-family: 'Fira Code', monospace;
       margin: 0;
       padding: 0;
-      background: #0f172a;
-      color: #e2e8f0;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: 0.4s ease;
     }
-    h1, h2, h3 {
-      text-align: center;
-      color: #38bdf8;
+
+    .light-mode {
+      --bg: #ffffff;
+      --text: #1e293b;
+      --accent: #0284c7;
+      --section-title: #0ea5e9;
     }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    #toggleMode {
+      background: none;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
     section {
       padding: 2rem;
       max-width: 900px;
       margin: auto;
     }
+
+    h1, h2, h3 {
+      color: var(--accent);
+      text-align: center;
+    }
+
     .section-title {
-      color: #22d3ee;
-      margin-bottom: 1rem;
+      color: var(--section-title);
     }
-    .badge-container img {
-      margin: 5px;
+
+    .badge-container {
+      text-align: center;
+      margin-top: 1rem;
     }
+
     .chart-container {
       max-width: 400px;
       margin: 2rem auto;
     }
+
     .progress-bar {
       background: #1e293b;
       border-radius: 8px;
       margin: 1rem 0;
       overflow: hidden;
     }
+
     .progress-bar span {
       display: block;
       padding: 0.5rem;
       color: white;
     }
+
     .completed { width: 70%; background: #22c55e; }
     .in-progress { width: 20%; background: #eab308; }
     .pending { width: 10%; background: #ef4444; }
-    a {
-      color: #60a5fa;
-    }
+
     footer {
       text-align: center;
       padding: 2rem;
       font-size: 0.9rem;
       color: #94a3b8;
     }
+
+    .resume-btn {
+      display: block;
+      margin: 1rem auto;
+      text-align: center;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      background: transparent;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .resume-btn:hover {
+      background: var(--accent);
+      color: #fff;
+    }
   </style>
 </head>
-
 <body>
 
-  <section data-aos="fade-down">
-    <h1><span id="typed"></span></h1>
+  <header>
+    <h2 id="typed"></h2>
+    <button id="toggleMode">🌙 Toggle Mode</button>
+  </header>
+
+  <section data-aos="fade-up">
     <h3>🚀 Software Ops Engineer | DevOps Engineer | IT Engineer | Cloud Engineer | Aspiring Cloud Architect ☁️</h3>
+    <a href="resume.pdf" class="resume-btn" download>📄 Download Resume</a>
   </section>
 
   <section data-aos="fade-up">
-    <h2 class="section-title">🧠 My Tech Arsenal — Deep Dive Mode ON 🔍</h2>
-    <p>💻 <strong>Languages & Logic</strong>: 🐍 Python | 🐹 GoLang | ⚡ SQL / PLSQL / Oracle SQL | 🐚 Bash</p>
-    <p>🌐 <strong>Web Stack</strong>: 🧩 Django | 🔥 Flask | 🎨 HTML/CSS | 📜 YAML</p>
-    <p>🤖 <strong>AI & ML</strong>: ML Models | Deep Neural Networks | AI Agents | CI/CD for AI</p>
-    <p>🔧 <strong>DevOps</strong>: Docker | Kubernetes | GitHub Actions | Jenkins | GitOps</p>
+    <h2 class="section-title">🧠 My Tech Arsenal</h2>
+    <p>💻 <strong>Languages & Logic</strong>: Python | GoLang | SQL / PLSQL / Oracle SQL | Bash</p>
+    <p>🌐 <strong>Full-Stack</strong>: Django | Flask | HTML/CSS | YAML</p>
+    <p>🤖 <strong>AI/ML</strong>: ML Models | DNNs | AI Agents | CI/CD for AI</p>
+    <p>🔧 <strong>DevOps</strong>: Docker | Kubernetes | GitHub Actions | Jenkins</p>
     <p>☁️ <strong>Cloud</strong>: AWS | OCI | GCP</p>
   </section>
 
-  <section data-aos="zoom-in">
+  <section data-aos="fade-up">
     <h2 class="section-title">📊 Language Usage</h2>
     <div class="chart-container">
       <canvas id="languageChart"></canvas>
     </div>
   </section>
 
-  <section data-aos="flip-up">
+  <section data-aos="fade-up">
     <h2 class="section-title">📈 Project Status</h2>
     <div class="progress-bar completed"><span>✅ Completed - 70%</span></div>
     <div class="progress-bar in-progress"><span>🚧 In Progress - 20%</span></div>
     <div class="progress-bar pending"><span>🕐 Pending - 10%</span></div>
   </section>
 
-  <section data-aos="fade-left">
+  <section data-aos="fade-up">
     <h2 class="section-title">💡 Ask Me About</h2>
     <p>"Nothing in particular... but everything technical. Surprise me!" 😎</p>
   </section>
 
-  <section data-aos="fade-right">
+  <section data-aos="fade-up">
     <h2 class="section-title">🎭 Fun Fact</h2>
     <p>I’m half-finished... just like every line of code before it compiles. #StillCompiling 🌀</p>
   </section>
 
   <section data-aos="fade-up">
     <h2 class="section-title">🔗 Let’s Connect</h2>
-    <div class="badge-container" style="text-align:center;">
+    <div class="badge-container">
       <a href="https://www.linkedin.com/in/vishal-abhinav/" target="_blank">
         <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
       </a>
@@ -131,28 +191,24 @@
 
   <footer data-aos="zoom-in">
     <p>Maintained with ❤️ by Vishal Abhinav<br>🛠️ DevOps Engineer | Problem Solver | Cloud Whisperer</p>
+    <img src="https://www.clipartmax.com/png/middle/151-1517653_devops-architecture-devops-architecture-google-devops-architecture.png" width="300"/>
   </footer>
 
-  <!-- DevOps Diagram -->
-  <div style="text-align:center;" data-aos="zoom-in">
-    <img src="https://www.clipartmax.com/png/middle/151-1517653_devops-architecture-devops-architecture-google-devops-architecture.png" width="300" />
-  </div>
-
-  <!-- AOS Init -->
+  <!-- AOS -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>AOS.init();</script>
 
-  <!-- Typed.js Init -->
+  <!-- Typed -->
   <script>
     new Typed("#typed", {
       strings: ["Hey there 👋, I'm Vishal Abhinav"],
       typeSpeed: 40,
-      backSpeed: 20,
+      backSpeed: 25,
       loop: true
     });
   </script>
 
-  <!-- Chart.js Init -->
+  <!-- Chart.js -->
   <script>
     const ctx = document.getElementById('languageChart').getContext('2d');
     new Chart(ctx, {
@@ -166,6 +222,21 @@
         }]
       }
     });
+  </script>
+
+  <!-- Dark Mode Toggle -->
+  <script>
+    const toggle = document.getElementById('toggleMode');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    });
+
+    window.onload = () => {
+      if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-mode');
+      }
+    };
   </script>
 
 </body>
