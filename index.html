@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vishal Abhinav - DevOps Engineer Portfolio</title>
+  
+  <!-- AOS Animate On Scroll -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  
+  <!-- Animate.css -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <style>
+    body {
+      font-family: 'Fira Code', monospace;
+      margin: 0;
+      padding: 0;
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+    h1, h2, h3 {
+      text-align: center;
+      color: #38bdf8;
+    }
+    section {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+    .section-title {
+      color: #22d3ee;
+      margin-bottom: 1rem;
+    }
+    .badge-container img {
+      margin: 5px;
+    }
+    .chart-container {
+      max-width: 400px;
+      margin: 2rem auto;
+    }
+    .progress-bar {
+      background: #1e293b;
+      border-radius: 8px;
+      margin: 1rem 0;
+      overflow: hidden;
+    }
+    .progress-bar span {
+      display: block;
+      padding: 0.5rem;
+      color: white;
+    }
+    .completed { width: 70%; background: #22c55e; }
+    .in-progress { width: 20%; background: #eab308; }
+    .pending { width: 10%; background: #ef4444; }
+    a {
+      color: #60a5fa;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <section data-aos="fade-down">
+    <h1><span id="typed"></span></h1>
+    <h3>🚀 Software Ops Engineer | DevOps Engineer | IT Engineer | Cloud Engineer | Aspiring Cloud Architect ☁️</h3>
+  </section>
+
+  <section data-aos="fade-up">
+    <h2 class="section-title">🧠 My Tech Arsenal — Deep Dive Mode ON 🔍</h2>
+    <p>💻 <strong>Languages & Logic</strong>: 🐍 Python | 🐹 GoLang | ⚡ SQL / PLSQL / Oracle SQL | 🐚 Bash</p>
+    <p>🌐 <strong>Web Stack</strong>: 🧩 Django | 🔥 Flask | 🎨 HTML/CSS | 📜 YAML</p>
+    <p>🤖 <strong>AI & ML</strong>: ML Models | Deep Neural Networks | AI Agents | CI/CD for AI</p>
+    <p>🔧 <strong>DevOps</strong>: Docker | Kubernetes | GitHub Actions | Jenkins | GitOps</p>
+    <p>☁️ <strong>Cloud</strong>: AWS | OCI | GCP</p>
+  </section>
+
+  <section data-aos="zoom-in">
+    <h2 class="section-title">📊 Language Usage</h2>
+    <div class="chart-container">
+      <canvas id="languageChart"></canvas>
+    </div>
+  </section>
+
+  <section data-aos="flip-up">
+    <h2 class="section-title">📈 Project Status</h2>
+    <div class="progress-bar completed"><span>✅ Completed - 70%</span></div>
+    <div class="progress-bar in-progress"><span>🚧 In Progress - 20%</span></div>
+    <div class="progress-bar pending"><span>🕐 Pending - 10%</span></div>
+  </section>
+
+  <section data-aos="fade-left">
+    <h2 class="section-title">💡 Ask Me About</h2>
+    <p>"Nothing in particular... but everything technical. Surprise me!" 😎</p>
+  </section>
+
+  <section data-aos="fade-right">
+    <h2 class="section-title">🎭 Fun Fact</h2>
+    <p>I’m half-finished... just like every line of code before it compiles. #StillCompiling 🌀</p>
+  </section>
+
+  <section data-aos="fade-up">
+    <h2 class="section-title">🔗 Let’s Connect</h2>
+    <div class="badge-container" style="text-align:center;">
+      <a href="https://www.linkedin.com/in/vishal-abhinav/" target="_blank">
+        <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
+      </a>
+      <a href="https://www.hackerrank.com/Vishal_Abhinav?hr_r=1" target="_blank">
+        <img src="https://img.shields.io/badge/HackerRank-2EC866?style=for-the-badge&logo=hackerrank&logoColor=white"/>
+      </a>
+      <a href="https://www.researchgate.net/profile/Vishal-Abhinav/research" target="_blank">
+        <img src="https://img.shields.io/badge/ResearchGate-00CCBB?style=for-the-badge&logo=researchgate&logoColor=white"/>
+      </a>
+    </div>
+  </section>
+
+  <footer data-aos="zoom-in">
+    <p>Maintained with ❤️ by Vishal Abhinav<br>🛠️ DevOps Engineer | Problem Solver | Cloud Whisperer</p>
+  </footer>
+
+  <!-- DevOps Diagram -->
+  <div style="text-align:center;" data-aos="zoom-in">
+    <img src="https://www.clipartmax.com/png/middle/151-1517653_devops-architecture-devops-architecture-google-devops-architecture.png" width="300" />
+  </div>
+
+  <!-- AOS Init -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init();</script>
+
+  <!-- Typed.js Init -->
+  <script>
+    new Typed("#typed", {
+      strings: ["Hey there 👋, I'm Vishal Abhinav"],
+      typeSpeed: 40,
+      backSpeed: 20,
+      loop: true
+    });
+  </script>
+
+  <!-- Chart.js Init -->
+  <script>
+    const ctx = document.getElementById('languageChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Python', 'GoLang', 'SQL', 'Bash'],
+        datasets: [{
+          label: 'Language Usage',
+          data: [40, 25, 20, 15],
+          backgroundColor: ['#60a5fa', '#22d3ee', '#34d399', '#f87171']
+        }]
+      }
+    });
+  </script>
+
+</body>
+</html>
