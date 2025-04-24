@@ -1,8 +1,8 @@
-name: Auto Run Script
+name: Auto Run Script Hourly
 
 on:
   schedule:
-    - cron: '0 * * * *'  
+    - cron: '0 * * * *'  # Every hour
   push:
     branches:
       - main
@@ -14,13 +14,16 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Make Script Executable
+        run: chmod +x update_stats.sh
+
       - name: Run the Script
         run: ./update_stats.sh
 
-      - name: Commit log file
+      - name: Commit log file if updated
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
           git add log.txt || echo "Nothing to add"
-          git commit -m "Automated log update on $(date)" || echo "Nothing to commit"
+          git diff --staged --quiet || git commit -m "Auto update at $(date)"
           git push
