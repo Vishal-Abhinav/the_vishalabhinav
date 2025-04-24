@@ -1,0 +1,26 @@
+name: Auto Run Script
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight UTC
+  push:
+    branches:
+      - main
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Run the Script
+        run: ./update_stats.sh
+
+      - name: Commit log file
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add log.txt || echo "Nothing to add"
+          git commit -m "Automated log update on $(date)" || echo "Nothing to commit"
+          git push
