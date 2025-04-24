@@ -7,8 +7,7 @@
 
   <!-- AOS (Animate on Scroll) -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-
+  
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"/>
 
@@ -24,8 +23,8 @@
       --text: #e2e8f0;
       --accent: #38bdf8;
       --section-title: #22d3ee;
-      --code-bg: #1e293b;
-      --code-text: #f8fafc;
+      --light-bg: #f1f5f9;
+      --light-text: #1e293b;
     }
 
     body {
@@ -34,7 +33,7 @@
       padding: 0;
       background-color: var(--bg);
       color: var(--text);
-      transition: background 0.4s ease, color 0.4s ease;
+      transition: 0.4s ease;
     }
 
     .light-mode {
@@ -42,8 +41,6 @@
       --text: #1e293b;
       --accent: #0284c7;
       --section-title: #0ea5e9;
-      --code-bg: #f3f4f6;
-      --code-text: #1e293b;
     }
 
     header {
@@ -51,14 +48,6 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-    }
-
-    #typed {
-      min-height: 2.5em;
-      font-size: 1.6rem;
-      text-align: center;
-      margin: auto;
-      flex: 1;
     }
 
     #toggleMode {
@@ -84,7 +73,6 @@
 
     .section-title {
       color: var(--section-title);
-      text-align: center;
     }
 
     .badge-container {
@@ -114,20 +102,6 @@
     .in-progress { width: 20%; background: #eab308; }
     .pending { width: 10%; background: #ef4444; }
 
-    .code-block {
-      background-color: var(--code-bg);
-      color: var(--code-text);
-      padding: 1rem;
-      border-radius: 6px;
-      margin: 1rem 0;
-      overflow-x: auto;
-      font-size: 0.9rem;
-    }
-
-    pre {
-      margin: 0;
-    }
-
     footer {
       text-align: center;
       padding: 2rem;
@@ -154,20 +128,33 @@
       color: #fff;
     }
 
-    img.devops-img {
-      width: 100%;
-      max-width: 1000px;
+    #nameInput {
       display: block;
       margin: 2rem auto;
+      padding: 0.5rem 1rem;
+      font-size: 1.1rem;
+      border: 2px solid var(--accent);
+      border-radius: 5px;
+      background-color: var(--bg);
+      color: var(--accent);
     }
 
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-      }
-      #typed {
-        font-size: 1.2rem;
-      }
+    #submitBtn {
+      display: block;
+      margin: 1rem auto;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      background: transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #submitBtn:hover {
+      background: var(--accent);
+      color: #fff;
     }
   </style>
 </head>
@@ -193,48 +180,6 @@
   </section>
 
   <section data-aos="fade-up">
-    <h2 class="section-title">🛠️ Deployment Code Showcase</h2>
-
-    <div class="code-block">
-      <pre><code># Python Automation
-import os
-for file in os.listdir():
-    print(f"📄 Found: {file}")</code></pre>
-    </div>
-
-    <div class="code-block">
-      <pre><code># Dockerfile
-FROM python:3.10
-COPY . /app
-WORKDIR /app
-CMD ["python", "main.py"]</code></pre>
-    </div>
-
-    <div class="code-block">
-      <pre><code># Kubernetes Deployment
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: my-app
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: web
-  template:
-    metadata:
-      labels:
-        app: web
-    spec:
-      containers:
-      - name: web
-        image: myapp:latest
-        ports:
-        - containerPort: 80</code></pre>
-    </div>
-  </section>
-
-  <section data-aos="fade-up">
     <h2 class="section-title">📊 Language Usage</h2>
     <div class="chart-container">
       <canvas id="languageChart"></canvas>
@@ -246,6 +191,24 @@ spec:
     <div class="progress-bar completed"><span>✅ Completed - 70%</span></div>
     <div class="progress-bar in-progress"><span>🚧 In Progress - 20%</span></div>
     <div class="progress-bar pending"><span>🕐 Pending - 10%</span></div>
+  </section>
+
+  <!-- Input Name Section -->
+  <section data-aos="fade-up">
+    <h2 class="section-title">Enter Your Name</h2>
+    <input type="text" id="nameInput" placeholder="Enter your name..." />
+    <button id="submitBtn">Submit</button>
+    <p id="personalizedMessage"></p>
+  </section>
+
+  <section data-aos="fade-up">
+    <h2 class="section-title">💡 Ask Me About</h2>
+    <p>"Nothing in particular... but everything technical. Surprise me!" 😎</p>
+  </section>
+
+  <section data-aos="fade-up">
+    <h2 class="section-title">🎭 Fun Fact</h2>
+    <p>I’m half-finished... just like every line of code before it compiles. #StillCompiling 🌀</p>
   </section>
 
   <section data-aos="fade-up">
@@ -265,32 +228,25 @@ spec:
 
   <footer data-aos="zoom-in">
     <p>Maintained with ❤️ by Vishal Abhinav<br>🛠️ DevOps Engineer | Problem Solver | Cloud Whisperer</p>
-    <img class="devops-img" src="https://www.clipartmax.com/png/middle/151-1517653_devops-architecture-devops-architecture-google-devops-architecture.png" alt="DevOps Architecture Diagram"/>
+    <img src="https://www.clipartmax.com/png/middle/151-1517653_devops-architecture-devops-architecture-google-devops-architecture.png" width="300"/>
   </footer>
 
-  <!-- Init JS -->
-  <script>
-    AOS.init();
+  <!-- AOS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init();</script>
 
+  <!-- Typed -->
+  <script>
     new Typed("#typed", {
       strings: ["Hey there 👋, I'm Vishal Abhinav"],
-      typeSpeed: 45,
-      backSpeed: 20,
+      typeSpeed: 40,
+      backSpeed: 25,
       loop: true
     });
+  </script>
 
-    const toggle = document.getElementById('toggleMode');
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('light-mode');
-      localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
-    });
-
-    window.onload = () => {
-      if (localStorage.getItem('theme') === 'light') {
-        document.body.classList.add('light-mode');
-      }
-    };
-
+  <!-- Chart.js -->
+  <script>
     const ctx = document.getElementById('languageChart').getContext('2d');
     new Chart(ctx, {
       type: 'doughnut',
@@ -302,6 +258,44 @@ spec:
           backgroundColor: ['#60a5fa', '#22d3ee', '#34d399', '#f87171']
         }]
       }
+    });
+  </script>
+
+  <!-- Dark Mode Toggle -->
+  <script>
+    const toggle = document.getElementById('toggleMode');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    });
+
+    window.onload = () => {
+      if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-mode');
+      }
+    };
+  </script>
+
+  <!-- Handle Name Input -->
+  <script>
+    const submitBtn = document.getElementById('submitBtn');
+    const nameInput = document.getElementById('nameInput');
+    const personalizedMessage = document.getElementById('personalizedMessage');
+
+    submitBtn.addEventListener('click', () => {
+      const name = nameInput.value;
+      if (name) {
+        personalizedMessage.innerHTML = `Hello, ${name}! Welcome to my portfolio!`;
+      } else {
+        personalizedMessage.innerHTML = 'Please enter your name.';
+      }
+    });
+  </script>
+
+  <!-- Disable Right-Click -->
+  <script>
+    document.addEventListener('contextmenu', (event) => {
+      event.preventDefault();
     });
   </script>
 
