@@ -7,7 +7,8 @@
 
   <!-- AOS (Animate on Scroll) -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
-  
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"/>
 
@@ -23,8 +24,8 @@
       --text: #e2e8f0;
       --accent: #38bdf8;
       --section-title: #22d3ee;
-      --light-bg: #f1f5f9;
-      --light-text: #1e293b;
+      --code-bg: #1e293b;
+      --code-text: #f8fafc;
     }
 
     body {
@@ -33,7 +34,7 @@
       padding: 0;
       background-color: var(--bg);
       color: var(--text);
-      transition: 0.4s ease;
+      transition: background 0.4s ease, color 0.4s ease;
     }
 
     .light-mode {
@@ -41,6 +42,8 @@
       --text: #1e293b;
       --accent: #0284c7;
       --section-title: #0ea5e9;
+      --code-bg: #f3f4f6;
+      --code-text: #1e293b;
     }
 
     header {
@@ -48,6 +51,14 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
+    }
+
+    #typed {
+      min-height: 2.5em;
+      font-size: 1.6rem;
+      text-align: center;
+      margin: auto;
+      flex: 1;
     }
 
     #toggleMode {
@@ -73,6 +84,7 @@
 
     .section-title {
       color: var(--section-title);
+      text-align: center;
     }
 
     .badge-container {
@@ -102,6 +114,20 @@
     .in-progress { width: 20%; background: #eab308; }
     .pending { width: 10%; background: #ef4444; }
 
+    .code-block {
+      background-color: var(--code-bg);
+      color: var(--code-text);
+      padding: 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      overflow-x: auto;
+      font-size: 0.9rem;
+    }
+
+    pre {
+      margin: 0;
+    }
+
     footer {
       text-align: center;
       padding: 2rem;
@@ -128,33 +154,56 @@
       color: #fff;
     }
 
-    #nameInput {
+    img.devops-img {
+      width: 100%;
+      max-width: 1000px;
       display: block;
       margin: 2rem auto;
-      padding: 0.5rem 1rem;
-      font-size: 1.1rem;
-      border: 2px solid var(--accent);
-      border-radius: 5px;
-      background-color: var(--bg);
-      color: var(--accent);
     }
 
-    #submitBtn {
-      display: block;
-      margin: 1rem auto;
-      padding: 0.7rem 1.5rem;
-      font-size: 1rem;
-      border: 2px solid var(--accent);
-      color: var(--accent);
-      background: transparent;
+    .blog-news-box {
+      background-color: var(--code-bg);
+      color: var(--code-text);
       border-radius: 6px;
-      cursor: pointer;
-      transition: 0.3s;
+      margin-top: 2rem;
+      padding: 1rem;
     }
 
-    #submitBtn:hover {
-      background: var(--accent);
-      color: #fff;
+    .blog-news-box h3 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .blog-item {
+      background-color: #1e293b;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+    }
+
+    .blog-item h4 {
+      margin: 0;
+      color: #38bdf8;
+    }
+
+    .blog-item p {
+      margin: 0.5rem 0;
+    }
+
+    .last-update {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      text-align: right;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+      }
+      #typed {
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
@@ -179,90 +228,50 @@
     <p>☁️ <strong>Cloud</strong>: AWS | OCI | GCP</p>
   </section>
 
+  <!-- LinkedIn Blogs & News Box -->
   <section data-aos="fade-up">
-    <h2 class="section-title">📊 Language Usage</h2>
-    <div class="chart-container">
-      <canvas id="languageChart"></canvas>
-    </div>
-  </section>
+    <div class="blog-news-box">
+      <h3>📰 Latest Updates & Blogs</h3>
+      
+      <!-- Blog Item 1 -->
+      <div class="blog-item">
+        <h4>How to Automate Cloud Infrastructure with Terraform</h4>
+        <p>Explore the essential steps to automate your cloud infrastructure with Terraform.</p>
+        <div class="last-update">Last updated: April 22, 2025</div>
+      </div>
 
-  <section data-aos="fade-up">
-    <h2 class="section-title">📈 Project Status</h2>
-    <div class="progress-bar completed"><span>✅ Completed - 70%</span></div>
-    <div class="progress-bar in-progress"><span>🚧 In Progress - 20%</span></div>
-    <div class="progress-bar pending"><span>🕐 Pending - 10%</span></div>
-  </section>
+      <!-- Blog Item 2 -->
+      <div class="blog-item">
+        <h4>DevOps Pipeline Essentials</h4>
+        <p>Learn how to set up an efficient DevOps pipeline to streamline software delivery.</p>
+        <div class="last-update">Last updated: April 20, 2025</div>
+      </div>
 
-  <!-- Input Name Section -->
-  <section data-aos="fade-up">
-    <h2 class="section-title">Enter Your Name</h2>
-    <input type="text" id="nameInput" placeholder="Enter your name..." />
-    <button id="submitBtn">Submit</button>
-    <p id="personalizedMessage"></p>
-  </section>
-
-  <section data-aos="fade-up">
-    <h2 class="section-title">💡 Ask Me About</h2>
-    <p>"Nothing in particular... but everything technical. Surprise me!" 😎</p>
-  </section>
-
-  <section data-aos="fade-up">
-    <h2 class="section-title">🎭 Fun Fact</h2>
-    <p>I’m half-finished... just like every line of code before it compiles. #StillCompiling 🌀</p>
-  </section>
-
-  <section data-aos="fade-up">
-    <h2 class="section-title">🔗 Let’s Connect</h2>
-    <div class="badge-container">
-      <a href="https://www.linkedin.com/in/vishal-abhinav/" target="_blank">
-        <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
-      </a>
-      <a href="https://www.hackerrank.com/Vishal_Abhinav?hr_r=1" target="_blank">
-        <img src="https://img.shields.io/badge/HackerRank-2EC866?style=for-the-badge&logo=hackerrank&logoColor=white"/>
-      </a>
-      <a href="https://www.researchgate.net/profile/Vishal-Abhinav/research" target="_blank">
-        <img src="https://img.shields.io/badge/ResearchGate-00CCBB?style=for-the-badge&logo=researchgate&logoColor=white"/>
-      </a>
+      <!-- Blog Item 3 -->
+      <div class="blog-item">
+        <h4>Optimizing Kubernetes Clusters</h4>
+        <p>Best practices for optimizing Kubernetes clusters for performance and cost-effectiveness.</p>
+        <div class="last-update">Last updated: April 18, 2025</div>
+      </div>
     </div>
   </section>
 
   <footer data-aos="zoom-in">
     <p>Maintained with ❤️ by Vishal Abhinav<br>🛠️ DevOps Engineer | Problem Solver | Cloud Whisperer</p>
-    <img src="https://www.clipartmax.com/png/middle/151-1517653_devops-architecture-devops-architecture-google-devops-architecture.png" width="300"/>
+    <img class="devops-img" src="https://www.clipartmax.com/png/middle/151-1517653_devops-architecture-devops-architecture-google-devops-architecture.png" alt="DevOps Architecture Diagram"/>
   </footer>
 
-  <!-- AOS -->
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script>AOS.init();</script>
-
-  <!-- Typed -->
+  <!-- Init JS -->
   <script>
+    AOS.init();
+
     new Typed("#typed", {
       strings: ["Hey there 👋, I'm Vishal Abhinav"],
-      typeSpeed: 40,
-      backSpeed: 25,
+      typeSpeed: 45,
+      backSpeed: 20,
       loop: true
     });
-  </script>
 
-  <!-- Chart.js -->
-  <script>
-    const ctx = document.getElementById('languageChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: ['Python', 'GoLang', 'SQL', 'Bash'],
-        datasets: [{
-          label: 'Language Usage',
-          data: [40, 25, 20, 15],
-          backgroundColor: ['#60a5fa', '#22d3ee', '#34d399', '#f87171']
-        }]
-      }
-    });
-  </script>
-
-  <!-- Dark Mode Toggle -->
-  <script>
     const toggle = document.getElementById('toggleMode');
     toggle.addEventListener('click', () => {
       document.body.classList.toggle('light-mode');
@@ -274,28 +283,18 @@
         document.body.classList.add('light-mode');
       }
     };
-  </script>
 
-  <!-- Handle Name Input -->
-  <script>
-    const submitBtn = document.getElementById('submitBtn');
-    const nameInput = document.getElementById('nameInput');
-    const personalizedMessage = document.getElementById('personalizedMessage');
-
-    submitBtn.addEventListener('click', () => {
-      const name = nameInput.value;
-      if (name) {
-        personalizedMessage.innerHTML = `Hello, ${name}! Welcome to my portfolio!`;
-      } else {
-        personalizedMessage.innerHTML = 'Please enter your name.';
+    const ctx = document.getElementById('languageChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Python', 'GoLang', 'SQL', 'Bash'],
+        datasets: [{
+          label: 'Language Usage',
+          data: [40, 25, 20, 15],
+          backgroundColor: ['#60a5fa', '#22d3ee', '#34d399', '#f87171']
+        }]
       }
-    });
-  </script>
-
-  <!-- Disable Right-Click -->
-  <script>
-    document.addEventListener('contextmenu', (event) => {
-      event.preventDefault();
     });
   </script>
 
