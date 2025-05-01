@@ -7,9 +7,13 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write  # Needed to allow git push with GITHUB_TOKEN
+
 jobs:
   run:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -21,9 +25,17 @@ jobs:
         run: ./update_stats.sh
 
       - name: Commit log file if updated
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add log.txt || echo "Nothing to add"
-          git diff --staged --quiet || git commit -m "Auto update at $(date)"
-          git push
+
+          # Add log.txt if it exists and changed
+          git add log.txt || echo "log.txt not found"
+
+          # Only commit if there are changes
+          git diff --cached --quiet || (
+            git commit -m "Auto update at $(date)"
+            git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }} HEAD:main
+          )
