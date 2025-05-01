@@ -1,41 +1,35 @@
-name: Auto Run Script Hourly
+name: Auto Daily Commits
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Every hour
-  push:
-    branches:
-      - main
+    - cron: '0 */2 * * *'  # Every 2 hours
+  workflow_dispatch:
 
 permissions:
-  contents: write  # Needed to allow git push with GITHUB_TOKEN
+  contents: write
 
 jobs:
-  run:
+  commit-job:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Make Script Executable
-        run: chmod +x update_stats.sh
-
-      - name: Run the Script
-        run: ./update_stats.sh
-
-      - name: Commit log file if updated
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Count Today's Commits
+        id: commit_count
         run: |
+          count=$(git log --since=midnight --oneline | wc -l)
+          echo "Commits today: $count"
+          echo "count=$count" >> $GITHUB_OUTPUT
+
+      - name: Make Commit if Less Than 5
+        if: ${{ steps.commit_count.outputs.count < 5 }}
+        run: |
+          echo "Committing dummy update..."
+          echo "Update at $(date)" >> log.txt
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-
-          # Add log.txt if it exists and changed
-          git add log.txt || echo "log.txt not found"
-
-          # Only commit if there are changes
-          git diff --cached --quiet || (
-            git commit -m "Auto update at $(date)"
-            git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }} HEAD:main
-          )
+          git add log.txt
+          git commit -m "Auto update at $(date)"
+          git push
