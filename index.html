@@ -2,351 +2,1921 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vishal Abhinav - DevOps Engineer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vishal Abhinav | Platform Ops Engineer | SRE</title>
+  <meta
+    name="description"
+    content="Vishal Abhinav portfolio site for Platform Ops Engineering, SRE, Platform Architecture, DevOps, Observability, and Cloud Operations."
+  />
 
-  <!-- AOS (Animate on Scroll) -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"/>
-
-  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <!-- Typed.js -->
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
   <style>
     :root {
-      --bg: #0f172a;
-      --text: #e2e8f0;
-      --accent: #38bdf8;
-      --section-title: #22d3ee;
-      --code-bg: #1e293b;
-      --code-text: #f8fafc;
+      --bg: #07111f;
+      --bg-soft: #0f1c31;
+      --panel: rgba(12, 26, 47, 0.82);
+      --panel-strong: rgba(11, 22, 39, 0.94);
+      --text: #e5eefb;
+      --muted: #93a9c9;
+      --line: rgba(148, 163, 184, 0.16);
+      --accent: #2dd4bf;
+      --accent-2: #38bdf8;
+      --accent-3: #84cc16;
+      --shadow: 0 30px 80px rgba(2, 8, 23, 0.45);
+      --hero-glow:
+        radial-gradient(circle at top left, rgba(45, 212, 191, 0.16), transparent 30%),
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.16), transparent 28%),
+        radial-gradient(circle at bottom center, rgba(132, 204, 22, 0.12), transparent 26%);
+    }
+
+    body.light-mode {
+      --bg: #f5f8fc;
+      --bg-soft: #e8eef8;
+      --panel: rgba(255, 255, 255, 0.92);
+      --panel-strong: rgba(255, 255, 255, 0.98);
+      --text: #0f172a;
+      --muted: #475569;
+      --line: rgba(15, 23, 42, 0.1);
+      --accent: #0f766e;
+      --accent-2: #0ea5e9;
+      --accent-3: #4d7c0f;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: 'Fira Code', monospace;
       margin: 0;
-      padding: 0;
-      background-color: var(--bg);
+      font-family: "Space Grotesk", sans-serif;
       color: var(--text);
-      transition: background 0.4s ease, color 0.4s ease;
+      background:
+        linear-gradient(180deg, rgba(3, 7, 18, 0.1), rgba(3, 7, 18, 0.6)),
+        var(--hero-glow),
+        linear-gradient(160deg, var(--bg) 0%, var(--bg-soft) 100%);
+      transition: background-color 0.35s ease, color 0.35s ease;
+      overflow-x: hidden;
     }
 
-    .light-mode {
-      --bg: #ffffff;
-      --text: #1e293b;
-      --accent: #0284c7;
-      --section-title: #0ea5e9;
-      --code-bg: #f3f4f6;
-      --code-text: #1e293b;
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(8px);
+      opacity: 0.65;
     }
 
-    header {
+    body::before {
+      top: 8%;
+      left: -120px;
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(circle, rgba(45, 212, 191, 0.18), transparent 65%);
+      animation: floatGlow 12s ease-in-out infinite;
+    }
+
+    body::after {
+      right: -100px;
+      bottom: 10%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.2), transparent 66%);
+      animation: floatGlow 16s ease-in-out infinite reverse;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(7, 17, 31, 0.58);
+      border-bottom: 1px solid var(--line);
+    }
+
+    body.light-mode .topbar {
+      background: rgba(245, 248, 252, 0.72);
+    }
+
+    .topbar-inner {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
     }
 
-    #typed {
-      min-height: 2.5em;
-      font-size: 1.6rem;
-      text-align: center;
-      margin: auto;
-      flex: 1;
-    }
-
-    #toggleMode {
-      background: none;
-      border: 2px solid var(--accent);
+    .brand {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.95rem;
       color: var(--accent);
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav a {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav a:hover {
+      color: var(--text);
+    }
+
+    .mode-toggle {
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      background: rgba(15, 23, 42, 0.3);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 16px;
       cursor: pointer;
-      font-family: inherit;
+      font-family: "JetBrains Mono", monospace;
     }
 
-    section {
-      padding: 2rem;
-      max-width: 900px;
-      margin: auto;
+    body.light-mode .mode-toggle {
+      background: rgba(255, 255, 255, 0.8);
     }
 
-    h1, h2, h3 {
-      color: var(--accent);
-      text-align: center;
+    .hero {
+      padding: 72px 0 34px;
     }
 
-    .section-title {
-      color: var(--section-title);
-      text-align: center;
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 28px;
+      align-items: stretch;
     }
 
-    .badge-container {
-      text-align: center;
-      margin-top: 1rem;
+    .hero-card,
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
     }
 
-    .chart-container {
-      max-width: 400px;
-      margin: 2rem auto;
-    }
-
-    .progress-bar {
-      background: #1e293b;
-      border-radius: 8px;
-      margin: 1rem 0;
+    .hero-card {
+      padding: 34px;
+      position: relative;
       overflow: hidden;
     }
 
-    .progress-bar span {
-      display: block;
-      padding: 0.5rem;
-      color: white;
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -90px auto;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.18), transparent 68%);
+      pointer-events: none;
     }
 
-    .completed { width: 70%; background: #22c55e; }
-    .in-progress { width: 20%; background: #eab308; }
-    .pending { width: 10%; background: #ef4444; }
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.06) 45%, transparent 70%);
+      transform: translateX(-120%);
+      animation: sheen 7s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(45, 212, 191, 0.1);
+      color: var(--accent);
+      font-size: 0.83rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid rgba(45, 212, 191, 0.18);
+    }
+
+    h1 {
+      margin: 18px 0 14px;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+    }
+
+    .typed-line {
+      min-height: 34px;
+      font-family: "JetBrains Mono", monospace;
+      color: var(--accent-2);
+      font-size: 1rem;
+      margin-bottom: 18px;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.75;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 24px 0 30px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      color: var(--text);
+      background: rgba(15, 23, 42, 0.26);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    body.light-mode .pill {
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .pill:hover,
+    .chip:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-width: 160px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      font-weight: 600;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.45);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, rgba(45, 212, 191, 0.2), rgba(56, 189, 248, 0.2));
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 18px;
+    }
+
+    .profile-card {
+      padding: 22px;
+      display: grid;
+      justify-items: center;
+      text-align: center;
+      background:
+        linear-gradient(180deg, rgba(45, 212, 191, 0.08), rgba(56, 189, 248, 0.04)),
+        var(--panel);
+    }
+
+    .profile-photo-wrap {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin-bottom: 16px;
+    }
+
+    .profile-photo-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      background: conic-gradient(from 180deg, rgba(45, 212, 191, 0.9), rgba(56, 189, 248, 0.85), rgba(132, 204, 22, 0.8), rgba(45, 212, 191, 0.9));
+      filter: blur(0.4px);
+      animation: spinRing 10s linear infinite;
+    }
+
+    .profile-photo {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid rgba(7, 17, 31, 0.92);
+      box-shadow: 0 22px 42px rgba(2, 8, 23, 0.32);
+    }
+
+    body.light-mode .profile-photo {
+      border-color: rgba(255, 255, 255, 0.94);
+    }
+
+    .profile-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+    }
+
+    .profile-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .hero-stat {
+      padding: 24px;
+    }
+
+    .hero-stat h3,
+    .hero-stat p,
+    .mini-card h3,
+    .mini-card p {
+      margin: 0;
+    }
+
+    .hero-stat h3 {
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+    }
+
+    .hero-stat p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .pulse-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 rgba(45, 212, 191, 0.45);
+      animation: pulse 2s infinite;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    main {
+      padding-bottom: 64px;
+    }
+
+    section {
+      padding: 24px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 620px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .mini-card {
+      padding: 24px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      transition: transform 0.28s ease, border-color 0.28s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mini-card:hover,
+    .repo-item:hover,
+    .connect-item:hover,
+    .status-row:hover,
+    .code-block:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .mini-card::after {
+      content: "";
+      position: absolute;
+      inset: auto auto -60px -40px;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(45, 212, 191, 0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .mini-card .tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      font-size: 0.83rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .mini-card h3 {
+      font-size: 1.18rem;
+      margin-bottom: 12px;
+    }
+
+    .mini-card p,
+    .mini-card li {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .mini-card ul {
+      margin: 14px 0 0;
+      padding-left: 18px;
+    }
+
+    .stack-columns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .stack-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.16);
+      color: var(--text);
+      font-size: 0.9rem;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .marquee {
+      margin: 6px 0 18px;
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(15, 23, 42, 0.18);
+    }
+
+    body.light-mode .marquee {
+      background: rgba(255, 255, 255, 0.58);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 18px;
+      width: max-content;
+      padding: 12px 0;
+      animation: marquee 22s linear infinite;
+      font-family: "JetBrains Mono", monospace;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.82rem;
+    }
+
+    .marquee-track span::after {
+      content: "•";
+      margin-left: 18px;
+      color: var(--accent);
+    }
+
+    .code-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
 
     .code-block {
-      background-color: var(--code-bg);
-      color: var(--code-text);
-      padding: 1rem;
-      border-radius: 6px;
-      margin: 1rem 0;
-      overflow-x: auto;
-      font-size: 0.9rem;
+      background: var(--panel-strong);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .code-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      font-family: "JetBrains Mono", monospace;
+      color: var(--muted);
+      font-size: 0.88rem;
     }
 
     pre {
       margin: 0;
+      padding: 18px;
+      overflow-x: auto;
+      color: #d9f3ff;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      font-family: "JetBrains Mono", monospace;
     }
+
+    body.light-mode pre {
+      color: #0f172a;
+    }
+
+    .chart-card {
+      padding: 24px;
+    }
+
+    .chart-wrap {
+      width: min(100%, 380px);
+      margin: 0 auto;
+    }
+
+    .analytics-shell {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+    }
+
+    .analytics-overview {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .analytics-metric {
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    .analytics-metric strong {
+      display: block;
+      font-size: 1.55rem;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+    }
+
+    .analytics-metric span {
+      display: block;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.92rem;
+    }
+
+    .chart-note {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, 0.22);
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    body.light-mode .chart-note {
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .repo-list,
+    .connect-links {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .repo-item,
+    .connect-item {
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .connect-item {
+      text-align: center;
+      transition: transform 0.28s ease, border-color 0.28s ease;
+    }
+
+    .connect-icon {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 14px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.16);
+    }
+
+    .connect-icon img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    .repo-item strong,
+    .connect-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+
+    .repo-item span,
+    .connect-item span {
+      display: block;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .repo-item a {
+      color: var(--accent-2);
+    }
+
+    .status-wrap {
+      display: grid;
+      gap: 14px;
+    }
+
+    .status-row {
+      padding: 16px 18px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      transition: transform 0.28s ease, border-color 0.28s ease;
+    }
+
+    .status-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .progress {
+      width: 100%;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.14);
+      overflow: hidden;
+    }
+
+    .progress > span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+    }
+
+    .progress-green { width: 78%; background: linear-gradient(90deg, #22c55e, #4ade80); }
+    .progress-blue { width: 64%; background: linear-gradient(90deg, #0ea5e9, #38bdf8); }
+    .progress-amber { width: 58%; background: linear-gradient(90deg, #f59e0b, #fbbf24); }
 
     footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #94a3b8;
+      padding: 18px 0 54px;
     }
 
-    .resume-btn {
-      display: block;
-      margin: 1rem auto;
+    .footer-card {
+      padding: 24px;
       text-align: center;
-      padding: 0.7rem 1.5rem;
-      font-size: 1rem;
-      border: 2px solid var(--accent);
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .footer-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 18px;
+      padding: 18px 20px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .timeline-year {
+      font-family: "JetBrains Mono", monospace;
       color: var(--accent);
-      background: transparent;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: 0.3s;
+      font-size: 0.92rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
-    .resume-btn:hover {
-      background: var(--accent);
-      color: #fff;
+    .timeline-item h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
     }
 
-    img.devops-img {
-      width: 100%;
-      max-width: 1000px;
+    .timeline-item p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .signal-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .signal-card {
+      padding: 22px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.18), rgba(15, 23, 42, 0.04));
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    body.light-mode .signal-card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.86));
+    }
+
+    .signal-number {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+    }
+
+    .signal-label {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .architecture {
+      padding: 26px;
+    }
+
+    .arch-flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      align-items: center;
+      margin-top: 18px;
+    }
+
+    .arch-node {
+      position: relative;
+      padding: 18px 14px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(56, 189, 248, 0.08);
+      text-align: center;
+      font-weight: 600;
+      min-height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .arch-node::after {
+      content: "→";
+      position: absolute;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+
+    .arch-node:last-child::after {
+      display: none;
+    }
+
+    .arch-stack {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .arch-card {
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(45, 212, 191, 0.06);
+    }
+
+    .arch-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.02rem;
+    }
+
+    .arch-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .highlight-list,
+    .cert-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .highlight-item,
+    .cert-item {
+      padding: 18px 20px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(56, 189, 248, 0.06);
+    }
+
+    .highlight-item strong,
+    .cert-item strong {
       display: block;
-      margin: 2rem auto;
+      margin-bottom: 8px;
+      font-size: 1rem;
     }
 
-    @media (max-width: 600px) {
-      header {
+    .highlight-item span,
+    .cert-item span {
+      display: block;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .article-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .article-card {
+      padding: 22px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      transition: transform 0.28s ease, border-color 0.28s ease;
+    }
+
+    .article-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .article-card .tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .article-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.08rem;
+    }
+
+    .article-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .two-col-panel {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .pro-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid-3,
+      .grid-2,
+      .stack-columns,
+      .code-showcase,
+      .signal-grid,
+      .arch-flow,
+      .analytics-shell,
+      .analytics-overview,
+      .connect-links,
+      .arch-stack,
+      .highlight-grid,
+      .article-strip,
+      .two-col-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
         flex-direction: column;
-      }
-      #typed {
-        font-size: 1.2rem;
+        align-items: flex-start;
       }
     }
 
-    .linkedin-posts {
-      padding: 2rem;
-      max-width: 900px;
-      margin: auto;
-      background: var(--bg);
-      border-radius: 10px;
+    @media (max-width: 720px) {
+      .topbar-inner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav {
+        justify-content: flex-start;
+      }
+
+      .hero-card,
+      .hero-stat,
+      .mini-card,
+      .chart-card,
+      .repo-item,
+      .connect-item,
+      .status-row {
+        padding: 20px;
+      }
+
+      .hero {
+        padding-top: 46px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+
+      .arch-node::after {
+        content: "↓";
+        right: auto;
+        left: 50%;
+        top: auto;
+        bottom: -15px;
+        transform: translateX(-50%);
+      }
     }
 
-    .linkedin-post {
-      background-color: #333;
-      border-radius: 10px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      color: #fff;
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.45);
+      }
+      70% {
+        box-shadow: 0 0 0 14px rgba(45, 212, 191, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(45, 212, 191, 0);
+      }
     }
 
-    .linkedin-post h3 {
-      color: var(--accent);
-      margin-bottom: 1rem;
+    @keyframes floatGlow {
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(18px, -24px, 0) scale(1.08);
+      }
     }
 
-    .linkedin-post p {
-      font-size: 1rem;
+    @keyframes sheen {
+      0%,
+      100% {
+        transform: translateX(-120%);
+      }
+      45%,
+      60% {
+        transform: translateX(130%);
+      }
     }
 
-    .linkedin-post a {
-      color: var(--accent);
-      text-decoration: none;
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    @keyframes spinRing {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
     }
   </style>
 </head>
 <body>
-
-  <header>
-    <h2 id="typed"></h2>
-    <button id="toggleMode">🌙 Toggle Mode</button>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <div class="brand">vishal abhinav</div>
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#stack">Stack</a>
+        <a href="#ops">Ops Focus</a>
+        <a href="#repos">Repos</a>
+        <a href="#connect">Connect</a>
+      </nav>
+      <button id="toggleMode" class="mode-toggle" type="button">Toggle Theme</button>
+    </div>
   </header>
 
-  <section data-aos="fade-up">
-    <h3>🚀 Software Engineer | DevOps Engineer | Application Ops | Cloud Engineer | Aspiring Cloud Architect ☁️</h3>
-    <a href="resume.pdf" class="resume-btn" download>📄 Download Resume</a>
-  </section>
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-grid">
+        <article class="hero-card" data-aos="fade-up">
+          <span class="eyebrow">Platform Ops Engineer / SRE</span>
+          <h1>Building reliable platforms with an architect’s mindset.</h1>
+          <div class="typed-line"><span id="typed"></span></div>
+          <p class="hero-copy">
+            I focus on platform operations, site reliability engineering, DevOps delivery, observability,
+            and cloud-ready architecture. My work centers on making systems easier to ship, easier to
+            operate, and easier to trust in production.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Platform Architecture</span>
+            <span class="pill">Python / Flask / Go</span>
+            <span class="pill">RHEL / Ubuntu / Linux</span>
+            <span class="pill">Kubernetes / Docker / Helm</span>
+            <span class="pill">OCI / AWS / GCP</span>
+            <span class="pill">Prometheus / Grafana / OpenTelemetry</span>
+          </div>
+          <div class="cta-row">
+            <a class="btn primary" href="https://www.linkedin.com/in/vishal-abhinav/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a class="btn" href="https://github.com/Vishal-Abhinav" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="btn" href="resume.pdf" download>Download Resume</a>
+          </div>
+        </article>
 
-  <section data-aos="fade-up">
-    <h2 class="section-title">🧠 My Tech Arsenal</h2>
-    <p>💻 <strong>Languages & Logic</strong>: Python | GoLang | SQL / PLSQL / Oracle SQL | Bash</p>
-    <p>🌐 <strong>Full-Stack</strong>: Django | Flask | HTML/CSS | YAML</p>
-    <p>🤖 <strong>AI/ML</strong>: ML Models | DNNs | AI Agents | CI/CD for AI</p>
-    <p>🔧 <strong>DevOps</strong>: Docker | Kubernetes | GitHub Actions | Jenkins</p>
-    <p>☁️ <strong>Cloud</strong>: AWS | OCI | GCP</p>
-  </section>
+        <aside class="hero-side">
+          <div class="hero-stat panel profile-card" data-aos="zoom-in" data-aos-delay="60">
+            <div class="profile-photo-wrap">
+              <img
+                class="profile-photo"
+                src="https://github.com/Vishal-Abhinav.png"
+                alt="Vishal Abhinav profile photo"
+              />
+            </div>
+            <h3>Vishal Abhinav</h3>
+            <p>Platform Ops Engineer / SRE with a Platform Architect focus.</p>
+          </div>
+          <div class="hero-stat panel" data-aos="fade-up" data-aos-delay="100">
+            <h3>Focus</h3>
+            <p>Platform Ops, SRE, DevOps automation, monitoring, repo quality, and operational maturity.</p>
+          </div>
+          <div class="hero-stat panel" data-aos="fade-up" data-aos-delay="180">
+            <h3>Strength</h3>
+            <p>Combining system design thinking with practical delivery pipelines, runtime visibility, and platform standards.</p>
+          </div>
+          <div class="hero-stat panel" data-aos="fade-up" data-aos-delay="260">
+            <h3>Direction</h3>
+            <p>OCI Certified, AI Certified, multicloud strategy oriented, and interested in AI for Ops workflows.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
 
-  <section data-aos="fade-up">
-    <h2 class="section-title">🛠️ Deployment Code Showcase</h2>
+    <section class="marquee" aria-label="platform highlights">
+      <div class="marquee-track">
+        <span>Platform Ops Engineer</span>
+        <span>Site Reliability Engineering</span>
+        <span>Platform Architecture</span>
+        <span>CI/CD Automation</span>
+        <span>Observability</span>
+        <span>Python Flask Go Bash</span>
+        <span>RHEL Ubuntu Linux</span>
+        <span>Kubernetes Docker Helm</span>
+        <span>OCI AWS GCP</span>
+        <span>AI for Ops</span>
+        <span>Platform Ops Engineer</span>
+        <span>Site Reliability Engineering</span>
+        <span>Platform Architecture</span>
+        <span>CI/CD Automation</span>
+        <span>Observability</span>
+        <span>Python Flask Go Bash</span>
+        <span>RHEL Ubuntu Linux</span>
+        <span>Kubernetes Docker Helm</span>
+        <span>OCI AWS GCP</span>
+        <span>AI for Ops</span>
+      </div>
+    </section>
 
-    <div class="code-block">
-      <pre><code># Python Automation
-import os
-for file in os.listdir():
-    print(f"📄 Found: {file}")</code></pre>
-    </div>
+    <section>
+      <div class="signal-grid" data-aos="fade-up">
+        <article class="signal-card">
+          <div class="signal-number">Platform</div>
+          <div class="signal-label">Operations, delivery, and reusable internal engineering paths.</div>
+        </article>
+        <article class="signal-card">
+          <div class="signal-number">SRE</div>
+          <div class="signal-label">Reliability, incident readiness, health validation, and alert quality.</div>
+        </article>
+        <article class="signal-card">
+          <div class="signal-number">Cloud</div>
+          <div class="signal-label">OCI certified, multicloud oriented, Linux-first operations mindset.</div>
+        </article>
+        <article class="signal-card">
+          <div class="signal-number">AI Ops</div>
+          <div class="signal-label">Interested in AI-assisted triage, automation, and operational knowledge flows.</div>
+        </article>
+      </div>
+    </section>
 
-    <div class="code-block">
-      <pre><code># Dockerfile
-FROM python:3.10
-COPY . /app
+    <section id="about">
+      <div class="section-head" data-aos="fade-up">
+        <h2>Executive Profile</h2>
+        <p>
+          Platform Ops Engineer and Site Reliability Engineer focused on resilient systems, repeatable
+          deployments, operational observability, and developer-friendly platform workflows.
+        </p>
+      </div>
+      <div class="grid grid-3">
+        <article class="mini-card" data-aos="fade-up">
+          <span class="tag">Role</span>
+          <h3>Platform Operations</h3>
+          <p>
+            Standardizing delivery flows, environment consistency, runtime health visibility, and
+            operational guardrails across systems.
+          </p>
+        </article>
+        <article class="mini-card" data-aos="fade-up" data-aos-delay="90">
+          <span class="tag">Mindset</span>
+          <h3>Site Reliability Engineering</h3>
+          <p>
+            Availability, incident readiness, alert quality, service health checks, and production
+            confidence through measurable operational signals.
+          </p>
+        </article>
+        <article class="mini-card" data-aos="fade-up" data-aos-delay="180">
+          <span class="tag">Focus</span>
+          <h3>Platform Architecture</h3>
+          <p>
+            Designing reusable foundations for CI/CD, observability, cloud operations, and scalable
+            internal engineering workflows.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head" data-aos="fade-up">
+        <h2>Professional Highlights</h2>
+        <p>
+          A more complete summary of the engineering value this profile is meant to communicate across
+          platform operations, SRE execution, cloud operations, and delivery maturity.
+        </p>
+      </div>
+      <div class="highlight-grid">
+        <article class="mini-card" data-aos="fade-up">
+          <span class="tag">Operations</span>
+          <h3>Production-Focused Platform Thinking</h3>
+          <div class="highlight-list">
+            <div class="highlight-item">
+              <strong>Deployment Confidence</strong>
+              <span>Interest in repeatable releases, safer rollouts, pipeline validation, and runtime verification after delivery.</span>
+            </div>
+            <div class="highlight-item">
+              <strong>Operational Visibility</strong>
+              <span>Focus on logs, metrics, traces, health checks, dashboards, and practical monitoring that supports action.</span>
+            </div>
+            <div class="highlight-item">
+              <strong>Linux-Based Execution</strong>
+              <span>Strong alignment with RHEL, Ubuntu, Shell, Bash, and day-to-day operational workflows around automation and troubleshooting.</span>
+            </div>
+          </div>
+        </article>
+        <article class="mini-card" data-aos="fade-up" data-aos-delay="90">
+          <span class="tag">Architecture</span>
+          <h3>Platform Architect Direction</h3>
+          <div class="highlight-list">
+            <div class="highlight-item">
+              <strong>Reusable Foundations</strong>
+              <span>Interest in creating shared patterns for CI/CD, runtime standards, observability, and internal engineering paths.</span>
+            </div>
+            <div class="highlight-item">
+              <strong>Cloud-Aware Design</strong>
+              <span>Comfortable framing infrastructure decisions across OCI, AWS, and GCP with a multicloud strategy mindset.</span>
+            </div>
+            <div class="highlight-item">
+              <strong>AI for Ops Direction</strong>
+              <span>Exploring AI-enabled triage, PR review assistance, incident summarization, and faster knowledge discovery for operations teams.</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head" data-aos="fade-up">
+        <h2>Operating Timeline</h2>
+        <p>
+          A quick narrative of how this profile is evolving toward platform-led operations, reliability,
+          delivery automation, and stronger production ownership.
+        </p>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item" data-aos="fade-up">
+          <div class="timeline-year">Foundation</div>
+          <div>
+            <h3>Hands-on development and scripting</h3>
+            <p>Built technical depth across Python, web technologies, automation tasks, SQL, and practical problem solving.</p>
+          </div>
+        </article>
+        <article class="timeline-item" data-aos="fade-up" data-aos-delay="90">
+          <div class="timeline-year">DevOps</div>
+          <div>
+            <h3>Delivery and deployment orientation</h3>
+            <p>Expanded into container workflows, CI/CD thinking, Git-based collaboration, and operational release discipline.</p>
+          </div>
+        </article>
+        <article class="timeline-item" data-aos="fade-up" data-aos-delay="180">
+          <div class="timeline-year">Platform</div>
+          <div>
+            <h3>Platform architecture and operations focus</h3>
+            <p>Shifted toward reusable platform patterns, observability-first design, runtime governance, and SRE-aligned ownership.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head" data-aos="fade-up">
+        <h2>Certifications and Direction</h2>
+        <p>
+          Credentials and growth areas that support this profile’s positioning toward platform
+          operations, cloud architecture, and AI-aware engineering.
+        </p>
+      </div>
+      <div class="grid grid-2">
+        <article class="mini-card" data-aos="fade-up">
+          <span class="tag">Credentials</span>
+          <h3>Certification Signals</h3>
+          <div class="cert-list">
+            <div class="cert-item">
+              <strong>OCI Certified</strong>
+              <span>Cloud platform understanding aligned with infrastructure, service deployment, and enterprise operations.</span>
+            </div>
+            <div class="cert-item">
+              <strong>AI Certified</strong>
+              <span>Supports the AI for Ops direction around workflow acceleration, operational intelligence, and automation enablement.</span>
+            </div>
+            <div class="cert-item">
+              <strong>Multicloud Strategy</strong>
+              <span>Interest in making architecture decisions with cloud flexibility, reliability, and long-term portability in mind.</span>
+            </div>
+          </div>
+        </article>
+        <article class="mini-card" data-aos="fade-up" data-aos-delay="90">
+          <span class="tag">Trajectory</span>
+          <h3>Professional Direction</h3>
+          <ul class="pro-list">
+            <li>Platform engineering with stronger operational ownership</li>
+            <li>SRE discipline with better service-level awareness</li>
+            <li>DevOps modernization through automation and reviewable workflows</li>
+            <li>Monitoring-first delivery with observability built into runtime expectations</li>
+            <li>Architecture thinking that supports both system scale and team scale</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="stack">
+      <div class="section-head" data-aos="fade-up">
+        <h2>Technology Stack</h2>
+        <p>
+          A practical toolset shaped around platform operations, DevOps delivery, Linux-based runtime
+          administration, and cloud-native visibility.
+        </p>
+      </div>
+      <div class="stack-columns">
+        <article class="mini-card" data-aos="fade-up">
+          <span class="tag">Languages and Frameworks</span>
+          <h3>Application and Automation Layer</h3>
+          <div class="stack-list">
+            <span class="chip">Python</span>
+            <span class="chip">Flask</span>
+            <span class="chip">Go</span>
+            <span class="chip">Shell</span>
+            <span class="chip">Bash</span>
+            <span class="chip">SQL</span>
+            <span class="chip">HTML</span>
+            <span class="chip">YAML</span>
+          </div>
+        </article>
+        <article class="mini-card" data-aos="fade-up" data-aos-delay="100">
+          <span class="tag">Platforms and Delivery</span>
+          <h3>Infrastructure and Operations Layer</h3>
+          <div class="stack-list">
+            <span class="chip">RHEL</span>
+            <span class="chip">Ubuntu</span>
+            <span class="chip">Docker</span>
+            <span class="chip">Kubernetes</span>
+            <span class="chip">Helm</span>
+            <span class="chip">Jenkins</span>
+            <span class="chip">GitHub Actions</span>
+            <span class="chip">Terraform</span>
+            <span class="chip">Ansible</span>
+            <span class="chip">Prometheus</span>
+            <span class="chip">Grafana</span>
+            <span class="chip">OpenTelemetry</span>
+            <span class="chip">OCI</span>
+            <span class="chip">AWS</span>
+            <span class="chip">GCP</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="ops">
+      <div class="section-head" data-aos="fade-up">
+        <h2>Platform and Ops Focus</h2>
+        <p>
+          The operational profile I want this portfolio to communicate clearly: production ownership,
+          delivery safety, runtime awareness, and systems thinking.
+        </p>
+      </div>
+      <div class="grid grid-2">
+        <article class="mini-card" data-aos="fade-up">
+          <span class="tag">SRE Metrics</span>
+          <h3>Reliability Priorities</h3>
+          <ul>
+            <li>SLO and SLA alignment</li>
+            <li>Error budget awareness</li>
+            <li>Alert quality improvement</li>
+            <li>MTTR reduction thinking</li>
+            <li>Health validation after release</li>
+          </ul>
+        </article>
+        <article class="mini-card" data-aos="fade-up" data-aos-delay="90">
+          <span class="tag">AI for Ops</span>
+          <h3>Modern Operations Direction</h3>
+          <ul>
+            <li>Incident summarization and triage support</li>
+            <li>Log analysis and signal enrichment</li>
+            <li>Pull request review assistance</li>
+            <li>Operational knowledge discovery</li>
+            <li>Automation support for repetitive workflows</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head" data-aos="fade-up">
+        <h2>SRE and Delivery Principles</h2>
+        <p>
+          A more comprehensive view of the principles guiding how I think about platform reliability,
+          deployments, monitoring, and engineering quality.
+        </p>
+      </div>
+      <div class="two-col-panel">
+        <article class="mini-card" data-aos="fade-up">
+          <span class="tag">Reliability</span>
+          <h3>Operational Principles</h3>
+          <ul class="pro-list">
+            <li>Services should be observable from day one</li>
+            <li>Alert quality is more important than alert quantity</li>
+            <li>Runbooks and known recovery paths reduce operational friction</li>
+            <li>Health signals should validate releases, not only detect failures later</li>
+            <li>Incident response improves when telemetry is organized and actionable</li>
+          </ul>
+        </article>
+        <article class="mini-card" data-aos="fade-up" data-aos-delay="90">
+          <span class="tag">Delivery</span>
+          <h3>Engineering Quality Principles</h3>
+          <ul class="pro-list">
+            <li>Pull requests should act as collaboration and quality gates</li>
+            <li>Infrastructure changes deserve the same review rigor as application code</li>
+            <li>Pipelines should be predictable, auditable, and rollback-aware</li>
+            <li>Shared platform paths should reduce cognitive load for delivery teams</li>
+            <li>Automation should improve speed without reducing control or visibility</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <article class="panel architecture" data-aos="fade-up">
+        <div class="section-head">
+          <h2>Platform Delivery View</h2>
+          <p>
+            A high-level operating path for how code, automation, runtime, and observability fit together
+            in the kind of systems I want to build and support.
+          </p>
+        </div>
+        <div class="arch-flow">
+          <div class="arch-node"><span class="pulse-dot"></span>Source and PR</div>
+          <div class="arch-node">CI and Validation</div>
+          <div class="arch-node">Artifacts and Containers</div>
+          <div class="arch-node">Deploy and Runtime</div>
+          <div class="arch-node">Monitoring and Feedback</div>
+        </div>
+        <div class="arch-stack">
+          <article class="arch-card">
+            <h3>Application and Automation Layer</h3>
+            <p>
+              Python, Flask, Go, Shell, and Bash used for service logic, scripting, delivery tasks,
+              integrations, and platform utility workflows.
+            </p>
+          </article>
+          <article class="arch-card">
+            <h3>Container and Orchestration Layer</h3>
+            <p>
+              Docker, Kubernetes, and Helm for packaging, deployment consistency, scalable runtime,
+              and cluster-oriented application operations.
+            </p>
+          </article>
+          <article class="arch-card">
+            <h3>CI/CD and Infrastructure Layer</h3>
+            <p>
+              Jenkins, GitHub Actions, Terraform, and Ansible for validation, pipeline automation,
+              deployment orchestration, and environment standardization.
+            </p>
+          </article>
+          <article class="arch-card">
+            <h3>Observability and Cloud Layer</h3>
+            <p>
+              Prometheus, Grafana, and OpenTelemetry for monitoring, with OCI, AWS, and GCP shaping
+              cloud-aware and multicloud-oriented platform decisions.
+            </p>
+          </article>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <div class="section-head" data-aos="fade-up">
+        <h2>Reference Architecture</h2>
+        <p>
+          A simplified architecture view of the kind of monitored, delivery-aware platform systems this
+          portfolio is oriented toward.
+        </p>
+      </div>
+      <div class="grid grid-3">
+        <article class="mini-card" data-aos="fade-up">
+          <span class="tag">Ingress</span>
+          <h3>Users and Entry Layer</h3>
+          <p>
+            Engineers, operators, or internal users access the platform through a UI, API gateway, or
+            controlled service endpoints.
+          </p>
+        </article>
+        <article class="mini-card" data-aos="fade-up" data-aos-delay="90">
+          <span class="tag">Core Services</span>
+          <h3>Application and Platform Services</h3>
+          <p>
+            Service modules handle business logic, automation, monitoring integrations, notifications,
+            and platform-specific workflows.
+          </p>
+        </article>
+        <article class="mini-card" data-aos="fade-up" data-aos-delay="180">
+          <span class="tag">Data and Signals</span>
+          <h3>Storage and Observability</h3>
+          <p>
+            Databases, logs, metrics, traces, dashboards, and alerts create the feedback loop needed
+            for reliable production operations.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head" data-aos="fade-up">
+        <h2>Knowledge and Content Direction</h2>
+        <p>
+          The topics I want this portfolio and newsletter presence to be associated with across
+          infrastructure, reliability, and technical communication.
+        </p>
+      </div>
+      <div class="article-strip">
+        <article class="article-card" data-aos="fade-up">
+          <span class="tag">Architecture</span>
+          <h3>Load Balancing, NGINX, and Traffic Control</h3>
+          <p>Platform-facing content around load balancing, reverse proxy behavior, session handling, and scalable traffic patterns.</p>
+        </article>
+        <article class="article-card" data-aos="fade-up" data-aos-delay="90">
+          <span class="tag">Resilience</span>
+          <h3>Disaster Recovery and Operational Readiness</h3>
+          <p>Knowledge-sharing around recovery planning, business continuity, and infrastructure resilience for modern cloud systems.</p>
+        </article>
+        <article class="article-card" data-aos="fade-up" data-aos-delay="180">
+          <span class="tag">Cloud Ops</span>
+          <h3>AWS and Multicloud Operations</h3>
+          <p>Practical interest in cloud observability, operational controls, and platform patterns that map well across cloud environments.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head" data-aos="fade-up">
+        <h2>Deployment Showcase</h2>
+        <p>
+          Representative snippets for automation, container delivery, and orchestrated runtime
+          deployment patterns.
+        </p>
+      </div>
+      <div class="code-showcase">
+        <article class="code-block" data-aos="fade-up">
+          <div class="code-head">
+            <span>automation.py</span>
+            <span>Python</span>
+          </div>
+          <pre><code>import pathlib
+
+workspace = pathlib.Path(".")
+for item in workspace.iterdir():
+    print(f"discovered: {item.name}")</code></pre>
+        </article>
+        <article class="code-block" data-aos="fade-up" data-aos-delay="100">
+          <div class="code-head">
+            <span>Dockerfile</span>
+            <span>Container</span>
+          </div>
+          <pre><code>FROM python:3.11-slim
 WORKDIR /app
+COPY . /app
+RUN pip install -r requirements.txt
 CMD ["python", "main.py"]</code></pre>
-    </div>
-
-    <div class="code-block">
-      <pre><code># Kubernetes Deployment
-apiVersion: apps/v1
+        </article>
+        <article class="code-block" data-aos="fade-up">
+          <div class="code-head">
+            <span>deployment.yaml</span>
+            <span>Kubernetes</span>
+          </div>
+          <pre><code>apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app
+  name: platform-ops-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: web
+      app: platform-ops-app
   template:
     metadata:
       labels:
-        app: web
+        app: platform-ops-app
     spec:
       containers:
-      - name: web
-        image: myapp:latest
-        ports:
-        - containerPort: 80</code></pre>
-    </div>
-  </section>
+        - name: app
+          image: platform-ops-app:latest
+          ports:
+            - containerPort: 8080</code></pre>
+        </article>
+        <article class="code-block" data-aos="fade-up" data-aos-delay="100">
+          <div class="code-head">
+            <span>pipeline.sh</span>
+            <span>Shell</span>
+          </div>
+          <pre><code>#!/usr/bin/env bash
+set -euo pipefail
 
-  <!-- LinkedIn Posts Section -->
-  <section class="linkedin-posts" data-aos="fade-up">
-    <h2 class="section-title">📝 Latest LinkedIn Posts</h2>
-    <div class="linkedin-post">
-      <h3>🚀 Post Title #1</h3>
-      <p>Here's an update about my latest project where I implemented CI/CD pipelines with Kubernetes. Read more about it <a href="https://www.linkedin.com/in/vishal-abhinav/" target="_blank">here</a>.</p>
-    </div>
-    <div class="linkedin-post">
-      <h3>💡 Post Title #2</h3>
-      <p>Just completed a cloud migration for a large-scale application. Check out the details of this process <a href="https://www.linkedin.com/in/vishal-abhinav/" target="_blank">here</a>.</p>
-    </div>
-  </section>
+echo "linting..."
+echo "running tests..."
+echo "building artifact..."
+echo "deploying to staging..."</code></pre>
+        </article>
+      </div>
+    </section>
 
-  <section data-aos="fade-up">
-    <h2 class="section-title">📊 Language Usage</h2>
-    <div class="chart-container">
-      <canvas id="languageChart"></canvas>
+    <section>
+      <div class="analytics-shell">
+        <article class="chart-card panel" data-aos="fade-up">
+          <div class="section-head">
+            <h2>Professional Analytics</h2>
+            <p>Visual snapshot of language orientation, automation preference, and operational engineering emphasis.</p>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="languageChart"></canvas>
+          </div>
+          <div class="analytics-overview">
+            <div class="analytics-metric">
+              <strong>Python</strong>
+              <span>Primary automation and backend scripting layer for tools, workflows, and utility engineering.</span>
+            </div>
+            <div class="analytics-metric">
+              <strong>Go</strong>
+              <span>Useful for systems-oriented services, platform tooling, and cloud-native engineering direction.</span>
+            </div>
+            <div class="analytics-metric">
+              <strong>Shell</strong>
+              <span>Operational glue for Linux workflows, delivery steps, environment automation, and quick execution paths.</span>
+            </div>
+          </div>
+          <div class="chart-note">
+            This chart is intended to communicate engineering direction rather than exact contribution accounting. It highlights the languages and workflow layers most relevant to platform operations, SRE, and delivery automation.
+          </div>
+        </article>
+        <article class="chart-card panel" data-aos="fade-up" data-aos-delay="100">
+          <div class="section-head">
+            <h2>Execution Priorities</h2>
+            <p>How the current profile is weighted across platform delivery, reliability, and AI-supported operations.</p>
+          </div>
+          <div class="status-wrap">
+            <div class="status-row">
+              <div class="status-top"><span>Platform Engineering</span><span>78%</span></div>
+              <div class="progress"><span class="progress-green"></span></div>
+            </div>
+            <div class="status-row">
+              <div class="status-top"><span>SRE and Observability</span><span>64%</span></div>
+              <div class="progress"><span class="progress-blue"></span></div>
+            </div>
+            <div class="status-row">
+              <div class="status-top"><span>AI for Ops</span><span>58%</span></div>
+              <div class="progress"><span class="progress-amber"></span></div>
+            </div>
+          </div>
+          <div class="analytics-overview">
+            <div class="analytics-metric">
+              <strong>78%</strong>
+              <span>Platform-first focus around delivery patterns, runtime consistency, and reusable engineering workflows.</span>
+            </div>
+            <div class="analytics-metric">
+              <strong>64%</strong>
+              <span>Operational visibility through monitoring, alert quality, health checks, and reliability thinking.</span>
+            </div>
+            <div class="analytics-metric">
+              <strong>58%</strong>
+              <span>AI-assisted operations direction across incident triage, PR support, and workflow acceleration.</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="repos">
+      <div class="section-head" data-aos="fade-up">
+        <h2>Repository Signals</h2>
+        <p>
+          A curated view of repositories that align most closely with platform operations, DevOps,
+          AI-enabled workflows, and open collaboration.
+        </p>
+      </div>
+      <div class="repo-list">
+        <article class="repo-item" data-aos="fade-up">
+          <strong><a href="https://github.com/Vishal-Abhinav/Platform-ops-Newsletter" target="_blank" rel="noreferrer">Platform-ops-Newsletter</a></strong>
+          <span>Platform operations and newsletter-focused project space for engineering communication, architecture direction, and portfolio visibility.</span>
+        </article>
+        <article class="repo-item" data-aos="fade-up" data-aos-delay="80">
+          <strong><a href="https://github.com/Vishal-Abhinav/DevOps-AI-Agent" target="_blank" rel="noreferrer">DevOps-AI-Agent</a></strong>
+          <span>DevOps and AI-oriented repository direction aligned with modern operational automation and AI-assisted engineering workflows.</span>
+        </article>
+        <article class="repo-item" data-aos="fade-up" data-aos-delay="160">
+          <strong><a href="https://github.com/Vishal-Abhinav/the_vishalabhinav" target="_blank" rel="noreferrer">the_vishalabhinav</a></strong>
+          <span>Portfolio hosting repository for public technical identity, profile presentation, and professional branding.</span>
+        </article>
+        <article class="repo-item" data-aos="fade-up" data-aos-delay="240">
+          <strong><a href="https://github.com/Vishal-Abhinav/node-mysql2" target="_blank" rel="noreferrer">node-mysql2</a></strong>
+          <span>Forked open source contribution path in a widely used Node.js data-access ecosystem, useful for public collaboration credibility.</span>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head" data-aos="fade-up">
+        <h2>Open Source and Collaboration</h2>
+        <p>
+          The public engineering signal here is not only about tools, but also about how I participate
+          through repositories, forks, pull requests, and technical visibility.
+        </p>
+      </div>
+      <div class="grid grid-2">
+        <article class="mini-card" data-aos="fade-up">
+          <span class="tag">Open Source</span>
+          <h3>Contribution Mindset</h3>
+          <ul class="pro-list">
+            <li>Fork-based exploration and improvement paths</li>
+            <li>Pull request driven collaboration and review culture</li>
+            <li>Documentation and technical communication as engineering assets</li>
+            <li>Broader interest in platform, DevOps, and observability ecosystems</li>
+          </ul>
+        </article>
+        <article class="mini-card" data-aos="fade-up" data-aos-delay="90">
+          <span class="tag">Visibility</span>
+          <h3>Public Engineering Presence</h3>
+          <ul class="pro-list">
+            <li>Portfolio hosting through personal repositories</li>
+            <li>Newsletter and article-oriented technical direction</li>
+            <li>LinkedIn and GitHub as professional engineering surfaces</li>
+            <li>Profile designed for platform, SRE, and DevOps opportunities</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="connect">
+      <div class="section-head" data-aos="fade-up">
+        <h2>Connect</h2>
+        <p>Open to platform engineering, SRE, DevOps, cloud operations, and open source collaboration opportunities.</p>
+      </div>
+      <div class="connect-links">
+        <article class="connect-item" data-aos="fade-up">
+          <div class="connect-icon">
+            <img src="https://cdn.simpleicons.org/linkedin/0A66C2" alt="LinkedIn logo" />
+          </div>
+          <strong>LinkedIn</strong>
+          <span><a href="https://www.linkedin.com/in/vishal-abhinav/" target="_blank" rel="noreferrer">linkedin.com/in/vishal-abhinav</a></span>
+        </article>
+        <article class="connect-item" data-aos="fade-up" data-aos-delay="80">
+          <div class="connect-icon">
+            <img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub logo" />
+          </div>
+          <strong>GitHub</strong>
+          <span><a href="https://github.com/Vishal-Abhinav" target="_blank" rel="noreferrer">github.com/Vishal-Abhinav</a></span>
+        </article>
+        <article class="connect-item" data-aos="fade-up" data-aos-delay="160">
+          <div class="connect-icon">
+            <img src="https://cdn.simpleicons.org/hackerrank/2EC866" alt="HackerRank logo" />
+          </div>
+          <strong>HackerRank</strong>
+          <span><a href="https://www.hackerrank.com/Vishal_Abhinav?hr_r=1" target="_blank" rel="noreferrer">hackerrank.com/Vishal_Abhinav</a></span>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <div class="footer-card" data-aos="zoom-in">
+        <p>
+          Maintained by Vishal Abhinav.<br />
+          Platform Ops Engineer | SRE | Platform Architect Focus | DevOps and Observability Oriented
+        </p>
+      </div>
     </div>
-  </section>
-
-  <section data-aos="fade-up">
-    <h2 class="section-title">📈 Project Status</h2>
-    <div class="progress-bar completed"><span>✅ Completed - 70%</span></div>
-    <div class="progress-bar in-progress"><span>🚧 In Progress - 20%</span></div>
-    <div class="progress-bar pending"><span>🕐 Pending - 10%</span></div>
-  </section>
-
-  <section data-aos="fade-up">
-    <h2 class="section-title">🔗 Let’s Connect</h2>
-    <div class="badge-container">
-      <a href="https://www.linkedin.com/in/vishal-abhinav/" target="_blank">
-        <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
-      </a>
-      <a href="https://www.hackerrank.com/Vishal_Abhinav?hr_r=1" target="_blank">
-        <img src="https://img.shields.io/badge/HackerRank-2EC866?style=for-the-badge&logo=hackerrank&logoColor=white"/>
-      </a>
-      <a href="https://www.researchgate.net/profile/Vishal-Abhinav/research" target="_blank">
-        <img src="https://img.shields.io/badge/ResearchGate-00CCBB?style=for-the-badge&logo=researchgate&logoColor=white"/>
-      </a>
-    </div>
-  </section>
-
-  <footer data-aos="zoom-in">
-    <p>Maintained with ❤️ by Vishal Abhinav<br>🛠️ DevOps Engineer | Problem Solver | Cloud Whisperer</p>
-    <img class="devops-img" src="https://www.clipartmax.com/png/middle/151-1517653_devops-architecture-devops-architecture-google-devops-architecture.png" alt="DevOps Architecture Diagram"/>
   </footer>
 
-  <!-- Init JS -->
   <script>
-    AOS.init();
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 40
+    });
 
     new Typed("#typed", {
-      strings: ["Hey there 👋, I'm Vishal Abhinav"],
-      typeSpeed: 45,
-      backSpeed: 20,
+      strings: [
+        "Platform Ops Engineer",
+        "Site Reliability Engineer",
+        "Platform Architect Focused",
+        "Python | Flask | Go | Shell | Bash",
+        "RHEL | Ubuntu | Kubernetes | OCI",
+        "Observability, Automation, and Cloud Operations"
+      ],
+      typeSpeed: 42,
+      backSpeed: 24,
+      backDelay: 1400,
       loop: true
     });
 
-    const toggle = document.getElementById('toggleMode');
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('light-mode');
-      localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    const toggle = document.getElementById("toggleMode");
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      localStorage.setItem(
+        "theme",
+        document.body.classList.contains("light-mode") ? "light" : "dark"
+      );
     });
 
-    window.onload = () => {
-      if (localStorage.getItem('theme') === 'light') {
-        document.body.classList.add('light-mode');
+    window.addEventListener("load", () => {
+      if (localStorage.getItem("theme") === "light") {
+        document.body.classList.add("light-mode");
       }
-    };
+    });
 
-    const ctx = document.getElementById('languageChart').getContext('2d');
+    const ctx = document.getElementById("languageChart").getContext("2d");
     new Chart(ctx, {
-      type: 'doughnut',
+      type: "doughnut",
       data: {
-        labels: ['Python', 'GoLang', 'SQL', 'Bash'],
-        datasets: [{
-          label: 'Language Usage',
-          data: [40, 25, 20, 15],
-          backgroundColor: ['#60a5fa', '#22d3ee', '#34d399', '#f87171']
-        }]
+        labels: ["Python", "Go", "Shell/Bash", "SQL"],
+        datasets: [
+          {
+            label: "Language Mix",
+            data: [38, 24, 22, 16],
+            backgroundColor: ["#38bdf8", "#2dd4bf", "#84cc16", "#f59e0b"],
+            hoverOffset: 16,
+            borderWidth: 0
+          }
+        ]
+      },
+      options: {
+        cutout: "68%",
+        animation: {
+          animateRotate: true,
+          duration: 1800
+        },
+        plugins: {
+          legend: {
+            position: "bottom",
+            labels: {
+              color: getComputedStyle(document.body).getPropertyValue("--text").trim(),
+              padding: 18,
+              usePointStyle: true,
+              pointStyle: "circle",
+              font: {
+                family: "JetBrains Mono"
+              }
+            }
+          }
+        },
+        layout: {
+          padding: 12
+        }
       }
     });
   </script>
-
 </body>
 </html>
